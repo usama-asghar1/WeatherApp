@@ -1,85 +1,3 @@
-// import { useState, useEffect } from "react";
-
-// type WeatherDataProps = {
-//   main: {
-//     temp?: number;
-//     feels_like?: number;
-//     humidity?: number;
-//     temp_min?: number;
-//     temp_max?: number;
-//     pressure?: number;
-//   };
-//   weather: [{ description: string }];
-//   name?: string;
-// };
-
-// type WeatherResponse = {
-//   main: WeatherDataProps["main"];
-//   weather: WeatherDataProps["weather"];
-//   name: WeatherDataProps["name"];
-// };
-
-// export default function WeatherData() {
-//   const [weatherData, setWeatherData] = useState<WeatherDataProps>({
-//     main: {},
-//     weather: [{ description: "" }],
-//   });
-
-//   // state to set city
-//   const [city, setCity] = useState<string>("London");
-
-//   useEffect(() => {
-//     async function fetchWeather() {
-//       const res = await fetch(
-//         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fde153f3844b17e39f35c5a4dda52b52&units=metric`
-//       );
-//       const data: WeatherResponse = await res.json();
-//       setWeatherData(data);
-//       console.log(data);
-//       console.log(data.main);
-//       console.log(data.weather[0].description);
-//     }
-//     fetchWeather();
-//   }, [city]);
-
-//   // function to handle city change
-//   function handleCityChange(event: React.ChangeEvent<HTMLInputElement>) {
-//     setCity(event.target.value);
-//   }
-
-//   return (
-//     <div>
-//       <form>
-//         <input
-//           type="search"
-//           placeholder="Please enter a city"
-//           autoComplete="off"
-//           onChange={handleCityChange}
-//         />
-//         <button type="submit">Search</button>
-//       </form>
-//       {weatherData.name && (
-//         <>
-//           <h1>{weatherData.name}</h1>
-//           {weatherData.main && (
-//             <>
-//               <p>Temperature: {weatherData.main.temp}</p>
-//               <p>Feels like: {weatherData.main.feels_like}</p>
-//               <p>Humidity: {weatherData.main.humidity}</p>
-//               <p>Min: {weatherData.main.temp_min}</p>
-//               <p>Max: {weatherData.main.temp_max}</p>
-//               <p>Pressure: {weatherData.main.pressure}</p>
-//             </>
-//           )}
-//           {weatherData.weather[0] && (
-//             <p>Description: {weatherData.weather[0].description}</p>
-//           )}
-//         </>
-//       )}
-//     </div>
-//   );
-// }
-
 import { useState, useEffect } from "react";
 
 type WeatherDataProps = {
@@ -91,7 +9,7 @@ type WeatherDataProps = {
     temp_max?: number;
     pressure?: number;
   };
-  weather: [{ description: string }];
+  weather: [{ description: string, icon: string }];
   name?: string;
 };
 
@@ -104,7 +22,7 @@ type WeatherResponse = {
 export default function WeatherData() {
   const [weatherData, setWeatherData] = useState<WeatherDataProps>({
     main: {},
-    weather: [{ description: "" }],
+    weather: [{ description: "", icon: "" }],
   });
 
   const [city, setCity] = useState<string>("London");
@@ -121,8 +39,9 @@ export default function WeatherData() {
       };
 
       fetchWeather();
+      blankCity();
     }
-  }, [city, ready]);
+  }, [ready]);
 
   useEffect(() => {
     setReady(true);
@@ -131,12 +50,19 @@ export default function WeatherData() {
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
     setReady(false);
+    // setCity(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setReady(true);
+    
   };
+
+  async function blankCity() {
+    await setCity("");
+  }
+
 
   return (
     <div>
@@ -161,11 +87,17 @@ export default function WeatherData() {
               <p>Min: {weatherData.main.temp_min}</p>
               <p>Max: {weatherData.main.temp_max}</p>
               <p>Pressure: {weatherData.main.pressure}</p>
+              
             </>
           )}
           {weatherData.weather[0] && (
             <p>Description: {weatherData.weather[0].description}</p>
+            
           )}
+          
+          <div>
+                <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="weather icon" />
+              </div>
         </>
       )}
     </div>
