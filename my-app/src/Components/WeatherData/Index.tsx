@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import WeatherIcons from "../WeatherIcons/Index";
+
 type WeatherDataProps = {
   main: {
     temp?: number;
@@ -9,7 +11,7 @@ type WeatherDataProps = {
     temp_max?: number;
     pressure?: number;
   };
-  weather: [{ description: string, icon: string }];
+  weather: [{ description: string; icon: string }];
   name?: string;
 };
 
@@ -56,13 +58,11 @@ export default function WeatherData() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setReady(true);
-    
   };
 
   async function blankCity() {
     await setCity("");
   }
-
 
   return (
     <div>
@@ -87,17 +87,19 @@ export default function WeatherData() {
               <p>Min: {weatherData.main.temp_min}</p>
               <p>Max: {weatherData.main.temp_max}</p>
               <p>Pressure: {weatherData.main.pressure}</p>
-              
             </>
           )}
           {weatherData.weather[0] && (
             <p>Description: {weatherData.weather[0].description}</p>
-            
           )}
-          
+
           <div>
-                <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="weather icon" />
-              </div>
+            <img
+              src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+              alt="weather icon"
+            />
+          </div>
+          <WeatherIcons icon={weatherData.weather[0].icon} />
         </>
       )}
     </div>
