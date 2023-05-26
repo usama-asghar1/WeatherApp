@@ -84,7 +84,7 @@ export default function WeatherData() {
           {weatherData.main && (
             <>
               <p>Temperature: {Math.round(weatherData.main.temp || 0)} C</p>
-              <p>Feels like: {Math.round(weatherData.main.feels_like || 0)}C</p>
+              <p>Feels like: {Math.round(weatherData.main.feels_like || 0)} C</p>
               <p>Humidity: {Math.round(weatherData.main.humidity || 0)}</p>
               <p>Min: {Math.round(weatherData.main.temp_min || 0)} C</p>
               <p>Max: {Math.round(weatherData.main.temp_max || 0)} C</p>
