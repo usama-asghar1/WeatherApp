@@ -7,6 +7,7 @@
   margin-top: 100px;
   background-image: url("https://images.theconversation.com/files/437680/original/file-20211215-13-1ahyjhw.jpg?ixlib=rb-1.1.0&rect=62%2C1023%2C5928%2C2964&q=45&auto=format&w=1356&h=668&fit=crop");
   background-size: cover;
+  border-radius: 10px;
 }
 
 .App-logo {
