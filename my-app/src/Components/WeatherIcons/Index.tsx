@@ -60,6 +60,8 @@ const WeatherIcons: React.FC<WeatherIconsProps> = ({ icon }) => {
     iconColor = "darkblue"; // Set color for nighttime icons
   }
 
+
+
   return (
     <ReactAnimatedWeather
       icon={weatherCode}

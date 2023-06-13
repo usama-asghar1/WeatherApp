@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./style.css";
 
 import WeatherIcons from "../WeatherIcons/Index";
 
@@ -64,6 +65,7 @@ export default function WeatherData() {
     await setCity("");
   }
 
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -81,25 +83,26 @@ export default function WeatherData() {
           <h1>{weatherData.name}</h1>
           {weatherData.main && (
             <>
-              <p>Temperature: {weatherData.main.temp}</p>
-              <p>Feels like: {weatherData.main.feels_like}</p>
-              <p>Humidity: {weatherData.main.humidity}</p>
-              <p>Min: {weatherData.main.temp_min}</p>
-              <p>Max: {weatherData.main.temp_max}</p>
-              <p>Pressure: {weatherData.main.pressure}</p>
+              <p>Temperature: {Math.round(weatherData.main.temp || 0)} C</p>
+              <p>Feels like: {Math.round(weatherData.main.feels_like || 0)} C</p>
+              <p>Humidity: {Math.round(weatherData.main.humidity || 0)}</p>
+              <p>Min: {Math.round(weatherData.main.temp_min || 0)} C</p>
+              <p>Max: {Math.round(weatherData.main.temp_max || 0)} C</p>
+              <p>Pressure: {Math.round(weatherData.main.pressure || 0)}</p>
             </>
           )}
           {weatherData.weather[0] && (
-            <p>Description: {weatherData.weather[0].description}</p>
+            <p>{weatherData.weather[0].description}</p>
           )}
 
-          <div>
+          <div className="weathericons">
+            <WeatherIcons icon={weatherData.weather[0].icon} />
             <img
               src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
               alt="weather icon"
             />
           </div>
-          <WeatherIcons icon={weatherData.weather[0].icon} />
+          
         </>
       )}
     </div>
