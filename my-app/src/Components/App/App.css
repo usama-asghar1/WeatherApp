@@ -4,10 +4,12 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   max-width: 800px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   background-image: url("https://images.theconversation.com/files/437680/original/file-20211215-13-1ahyjhw.jpg?ixlib=rb-1.1.0&rect=62%2C1023%2C5928%2C2964&q=45&auto=format&w=1356&h=668&fit=crop");
   background-size: cover;
   border-radius: 10px;
+
 }
 
 .App-logo {
