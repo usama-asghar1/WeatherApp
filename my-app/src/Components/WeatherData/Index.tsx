@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./style.css";
-
+//
 import WeatherIcons from "../WeatherIcons/Index";
 
 type WeatherDataProps = {
